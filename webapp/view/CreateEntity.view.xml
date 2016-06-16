@@ -1,0 +1,84 @@
+<mvc:View controllerName="ns.controller.CreateEntity" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+	xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
+	xmlns:smart="sap.ui.comp.smartfield" xmlns="sap.m">
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" title="{viewModel>/viewTitle}" busy="{viewModel>/busy}">
+		<semantic:content>
+			<f:SimpleForm class="editableForm" columnsL="1" columnsM="1" editable="true" emptySpanL="4" emptySpanM="4" id="newEntitySimpleForm"
+				labelSpanL="3" labelSpanM="3" layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024"
+				title="{= ${viewModel>/mode} === 'edit'? 'Edit /IWBEP/GWSAMPLE_BASIC.Product': 'New /IWBEP/GWSAMPLE_BASIC.Product'}">
+				<f:content>
+					<Label text="Product ID" required="true"/>
+					<Input name="ProductID" id="ProductID_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement"
+						enabled="{= ${viewModel>/mode} === 'edit'? false: true}" visible="true"
+						value="{ path: 'ProductID', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:10, nullable:false } }"/>
+					<Label text="Type Code" required="true"/>
+					<Input name="TypeCode" id="TypeCode_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="true" visible="true"
+						value="{ path: 'TypeCode', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:2, nullable:false } }"/>
+					<Label text="Category" required="true"/>
+					<Input name="Category" id="Category_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="true" visible="true"
+						value="{ path: 'Category', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:40, nullable:false } }"/>
+					<Label text="Product Name" required="true"/>
+					<Input name="Name" id="Name_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="true" visible="true"
+						value="{ path: 'Name', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:255, nullable:false } }"/>
+					<Label text="Language" required="false"/>
+					<Input name="NameLanguage" id="NameLanguage_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="false" visible="true"
+						value="{ path: 'NameLanguage', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:2 } }"/>
+					<Label text="Prod.Descrip." required="false"/>
+					<Input name="Description" id="Description_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="true" visible="true"
+						value="{ path: 'Description', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:255 } }"/>
+					<Label text="Language" required="false"/>
+					<Input name="DescriptionLanguage" id="DescriptionLanguage_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="false"
+						visible="true" value="{ path: 'DescriptionLanguage', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:2 } }"/>
+					<Label text="Business Partner ID" required="true"/>
+					<Input name="SupplierID" id="SupplierID_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="true" visible="true"
+						value="{ path: 'SupplierID', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:10, nullable:false } }"/>
+					<Label text="Company" required="false"/>
+					<Input name="SupplierName" id="SupplierName_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="false" visible="true"
+						value="{ path: 'SupplierName', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:80 } }"/>
+					<Label text="Tax Tariff Code" required="true"/>
+					<Input name="TaxTarifCode" id="TaxTarifCode_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="true" visible="true"
+						value="{ path: 'TaxTarifCode', type: 'sap.ui.model.odata.type.Byte' , constraints:{ nullable:false } }"/>
+					<Label text="Unit of Measure" required="true"/>
+					<Input name="MeasureUnit" id="MeasureUnit_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="true" visible="true"
+						value="{ path: 'MeasureUnit', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:3, nullable:false } }"/>
+					<Label text="Weight" required="false"/>
+					<Input name="WeightMeasure" id="WeightMeasure_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="true" visible="true"
+						value="{ path: 'WeightMeasure', type: 'sap.ui.model.odata.type.Decimal' , constraints:{ precision:13, scale:3 } }"/>
+					<Label text="Unit of Measure" required="false"/>
+					<Input name="WeightUnit" id="WeightUnit_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="true" visible="true"
+						value="{ path: 'WeightUnit', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:3 } }"/>
+					<Label text="Currency Code" required="true"/>
+					<Input name="CurrencyCode" id="CurrencyCode_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="true" visible="true"
+						value="{ path: 'CurrencyCode', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:5, nullable:false } }"/>
+					<Label text="Price" required="false"/>
+					<Input name="Price" id="Price_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="true" visible="true"
+						value="{ path: 'Price', type: 'sap.ui.model.odata.type.Decimal' , constraints:{ precision:16, scale:3 } }"/>
+					<Label text="Dimensions" required="false"/>
+					<Input name="Width" id="Width_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="true" visible="true"
+						value="{ path: 'Width', type: 'sap.ui.model.odata.type.Decimal' , constraints:{ precision:13, scale:3 } }"/>
+					<Label text="Dimensions" required="false"/>
+					<Input name="Depth" id="Depth_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="true" visible="true"
+						value="{ path: 'Depth', type: 'sap.ui.model.odata.type.Decimal' , constraints:{ precision:13, scale:3 } }"/>
+					<Label text="Dimensions" required="false"/>
+					<Input name="Height" id="Height_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="true" visible="true"
+						value="{ path: 'Height', type: 'sap.ui.model.odata.type.Decimal' , constraints:{ precision:13, scale:3 } }"/>
+					<Label text="Dimension Unit" required="false"/>
+					<Input name="DimUnit" id="DimUnit_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="true" visible="true"
+						value="{ path: 'DimUnit', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:3 } }"/>
+					<Label text="Time Stamp" required="false"/>
+					<DatePicker name="CreatedAt" value="{ path: 'CreatedAt', type: 'sap.ui.model.type.DateTime'}" id="CreatedAt_id" type="DateTime"
+						enabled="false" visible="true"/>
+					<Label text="Time Stamp" required="false"/>
+					<DatePicker name="ChangedAt" value="{ path: 'ChangedAt', type: 'sap.ui.model.type.DateTime'}" id="ChangedAt_id" type="DateTime"
+						enabled="false" visible="true"/>
+				</f:content>
+			</f:SimpleForm>
+		</semantic:content>
+		<semantic:saveAction>
+			<semantic:SaveAction id="save" enabled="{viewModel>/enableCreate}" press="onSave"/>
+		</semantic:saveAction>
+		<semantic:cancelAction>
+			<semantic:CancelAction id="cancel" press="onCancel"></semantic:CancelAction>
+		</semantic:cancelAction>
+	</semantic:DetailPage>
+</mvc:View>
